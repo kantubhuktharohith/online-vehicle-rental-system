@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DriveFleet — Premium Online Vehicle Rental System. Browse, book, and manage vehicle rentals with ease. Cars, SUVs, bikes and more available for instant booking.">
+  <meta name="keywords" content="vehicle rental, car rental, bike rental, online booking, DriveFleet">
+  <title>DriveFleet — Online Vehicle Rental System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ═══ Navigation ═══ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo" onclick="navigateTo('home')">
+        <div class="logo-icon">🚗</div>
+        <span>Drive<span class="gradient-text">Fleet</span></span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active" data-page="home" onclick="navigateTo('home')">Home</a></li>
+        <li><a href="#vehicles" data-page="vehicles" onclick="navigateTo('vehicles')">Vehicles</a></li>
+        <li><a href="#rent" data-page="rent" onclick="navigateTo('rent')">Rent Now</a></li>
+        <li><a href="#return" data-page="return" onclick="navigateTo('return')">Return</a></li>
+        <li><a href="#admin" data-page="admin" onclick="navigateTo('admin')" class="nav-admin-btn">⚡ Admin</a></li>
+      </ul>
+      <div class="nav-toggle" id="navToggle" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ Toast Container ═══ -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- ═══ HOME PAGE ═══ -->
+  <!-- ══════════════════════════════════════ -->
+  <section class="page-section active" id="page-home">
+    <div class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="dot"></span>
+            Available 24/7
+          </div>
+          <h1>Your Journey,<br>Our <span>Wheels</span></h1>
+          <p>Experience premium vehicle rentals with DriveFleet. Choose from our curated fleet of SUVs, sedans, hatchbacks, and bikes — all at competitive daily rates.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary btn-lg" onclick="navigateTo('vehicles')">
+              🚘 Browse Fleet
+            </button>
+            <button class="btn btn-secondary btn-lg" onclick="navigateTo('rent')">
+              📋 Book Now
+            </button>
+          </div>
+
+          <div class="stats-row" id="heroStats">
+            <div class="stat-item">
+              <div class="stat-number" data-target="150">0</div>
+              <div class="stat-label">Vehicles Available</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" data-target="2500">0</div>
+              <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" data-target="50">0</div>
+              <div class="stat-label">Cities Covered</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number" data-target="99">0</div>
+              <div class="stat-label">% Satisfaction</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- ═══ VEHICLES PAGE ═══ -->
+  <!-- ══════════════════════════════════════ -->
+  <section class="page-section" id="page-vehicles">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Vehicle Fleet</h2>
+        <p>Choose from our wide selection of premium vehicles</p>
+      </div>
+
+      <div class="filter-tabs" id="filterTabs">
+        <button class="filter-tab active" data-filter="all" onclick="filterVehicles('all')">All</button>
+        <button class="filter-tab" data-filter="SUV" onclick="filterVehicles('SUV')">🚙 SUV</button>
+        <button class="filter-tab" data-filter="Sedan" onclick="filterVehicles('Sedan')">🚗 Sedan</button>
+        <button class="filter-tab" data-filter="Hatchback" onclick="filterVehicles('Hatchback')">🚕 Hatchback</button>
+        <button class="filter-tab" data-filter="Bike" onclick="filterVehicles('Bike')">🏍️ Bike</button>
+        <button class="filter-tab" data-filter="Luxury" onclick="filterVehicles('Luxury')">✨ Luxury</button>
+      </div>
+
+      <div class="vehicles-grid" id="vehiclesGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- ═══ RENT PAGE ═══ -->
+  <!-- ══════════════════════════════════════ -->
+  <section class="page-section" id="page-rent">
+    <div class="container">
+      <div class="section-title">
+        <h2>Rent a Vehicle</h2>
+        <p>Complete the steps below to book your ride</p>
+      </div>
+
+      <!-- Steps Indicator -->
+      <div class="steps-indicator">
+        <div class="step active" data-step="1">
+          <div class="step-circle">1</div>
+          <div class="step-label">Select Vehicle</div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-circle">2</div>
+          <div class="step-label">Your Details</div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-circle">3</div>
+          <div class="step-label">Dates & Confirm</div>
+        </div>
+      </div>
+
+      <!-- Step 1: Select Vehicle -->
+      <div class="step-content active" id="rentStep1">
+        <div class="form-container" style="max-width: 800px;">
+          <div class="glass-card" style="margin-bottom: var(--space-lg);">
+            <h3 style="margin-bottom: var(--space-lg);">🚘 Select an Available Vehicle</h3>
+            <div class="vehicle-select-grid" id="rentVehicleGrid">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+          <div style="text-align: center;">
+            <button class="btn btn-primary btn-lg" onclick="goToRentStep(2)" id="rentStep1Next" disabled>
+              Next → Customer Details
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Customer Details -->
+      <div class="step-content" id="rentStep2">
+        <div class="form-container">
+          <div class="glass-card">
+            <h3 style="margin-bottom: var(--space-lg);">👤 Customer Information</h3>
+            <div class="form-group">
+              <label class="form-label" for="customerName">Full Name</label>
+              <input type="text" class="form-input" id="customerName" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="customerPhone">Phone Number</label>
+              <input type="tel" class="form-input" id="customerPhone" placeholder="Enter 10-digit phone number" maxlength="10" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="customerEmail">Email (Optional)</label>
+              <input type="email" class="form-input" id="customerEmail" placeholder="yourname@example.com">
+            </div>
+          </div>
+          <div style="display: flex; gap: var(--space-md); justify-content: center; margin-top: var(--space-xl);">
+            <button class="btn btn-secondary btn-lg" onclick="goToRentStep(1)">← Back</button>
+            <button class="btn btn-primary btn-lg" onclick="goToRentStep(3)">Next → Dates</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Dates & Confirm -->
+      <div class="step-content" id="rentStep3">
+        <div class="form-container">
+          <div class="glass-card">
+            <h3 style="margin-bottom: var(--space-lg);">📅 Rental Period</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="rentDate">Start Date</label>
+                <input type="date" class="form-input" id="rentDate" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="returnDate">End Date</label>
+                <input type="date" class="form-input" id="returnDate" required>
+              </div>
+            </div>
+
+            <!-- Cost Preview -->
+            <div id="costPreview" style="display: none; margin-top: var(--space-lg);">
+              <div class="glass-card" style="background: rgba(6, 182, 212, 0.05); border-color: rgba(6, 182, 212, 0.2);">
+                <h4 style="margin-bottom: var(--space-md); color: var(--accent-primary);">💰 Cost Estimate</h4>
+                <div class="receipt-row">
+                  <span class="label">Vehicle</span>
+                  <span class="value" id="previewVehicle">—</span>
+                </div>
+                <div class="receipt-row">
+                  <span class="label">Rate per day</span>
+                  <span class="value" id="previewRate">—</span>
+                </div>
+                <div class="receipt-row">
+                  <span class="label">Duration</span>
+                  <span class="value" id="previewDays">—</span>
+                </div>
+                <div class="receipt-row receipt-total">
+                  <span class="label" style="font-weight: 700;">Total Cost</span>
+                  <span class="value" id="previewTotal">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; gap: var(--space-md); justify-content: center; margin-top: var(--space-xl);">
+            <button class="btn btn-secondary btn-lg" onclick="goToRentStep(2)">← Back</button>
+            <button class="btn btn-success btn-lg" onclick="confirmRental()" id="confirmRentalBtn">
+              ✅ Confirm Booking
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- ═══ RETURN PAGE ═══ -->
+  <!-- ══════════════════════════════════════ -->
+  <section class="page-section" id="page-return">
+    <div class="container">
+      <div class="section-title">
+        <h2>Return a Vehicle</h2>
+        <p>Enter your rental ID to process the return</p>
+      </div>
+
+      <div class="form-container">
+        <div class="glass-card">
+          <h3 style="margin-bottom: var(--space-lg);">🔍 Find Your Rental</h3>
+          <div class="form-group">
+            <label class="form-label" for="returnRentalId">Rental ID</label>
+            <input type="text" class="form-input" id="returnRentalId" placeholder="e.g. R001">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="actualReturnDate">Actual Return Date</label>
+            <input type="date" class="form-input" id="actualReturnDate">
+          </div>
+          <button class="btn btn-primary" onclick="processReturn()" style="width: 100;">
+            🔎 Process Return
+          </button>
+        </div>
+
+        <!-- Return Result -->
+        <div id="returnResult" style="display: none; margin-top: var(--space-xl);">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- ═══ ADMIN PAGE ═══ -->
+  <!-- ══════════════════════════════════════ -->
+  <section class="page-section" id="page-admin">
+    <div class="container">
+      <!-- Admin Login -->
+      <div id="adminLogin">
+        <div class="section-title">
+          <h2>Admin Panel</h2>
+          <p>Login to manage vehicles and rentals</p>
+        </div>
+        <div class="login-container">
+          <div class="glass-card">
+            <div class="lock-icon">🔒</div>
+            <h3 style="margin-bottom: var(--space-xl);">Admin Login</h3>
+            <div class="form-group">
+              <label class="form-label" for="adminUser">Username</label>
+              <input type="text" class="form-input" id="adminUser" placeholder="admin">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="adminPass">Password</label>
+              <input type="password" class="form-input" id="adminPass" placeholder="••••••••">
+            </div>
+            <button class="btn btn-primary" onclick="adminLogin()" style="width: 100%;" id="adminLoginBtn">
+              🔓 Login
+            </button>
+            <p style="margin-top: var(--space-md); font-size: 0.8rem; color: var(--text-muted);">
+              Default: admin / admin123
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Dashboard (hidden until login) -->
+      <div id="adminDashboard" style="display: none;">
+        <div class="admin-header">
+          <div>
+            <h2>Dashboard</h2>
+            <p style="color: var(--text-muted);">Manage your fleet and rentals</p>
+          </div>
+          <div style="display: flex; gap: var(--space-md); align-items: center;">
+            <span style="color: var(--success); font-size: 0.9rem;">● Logged in as Admin</span>
+            <button class="btn btn-secondary btn-sm" onclick="adminLogout()">Logout</button>
+          </div>
+        </div>
+
+        <!-- Admin Stats -->
+        <div class="admin-stat-cards" id="adminStats">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- Admin Tabs -->
+        <div class="admin-tabs">
+          <button class="admin-tab active" onclick="switchAdminTab('vehicles')">🚗 Vehicles</button>
+          <button class="admin-tab" onclick="switchAdminTab('rentals')">📋 Rentals</button>
+          <button class="admin-tab" onclick="switchAdminTab('add')">➕ Add Vehicle</button>
+        </div>
+
+        <!-- Tab: Vehicles -->
+        <div class="admin-tab-content" id="adminTabVehicles">
+          <div class="table-container">
+            <table class="data-table" id="adminVehicleTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Vehicle</th>
+                  <th>Type</th>
+                  <th>Rate/Day</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminVehicleBody">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab: Rentals -->
+        <div class="admin-tab-content" id="adminTabRentals" style="display: none;">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search by rental ID, customer name..." id="rentalSearch" oninput="renderAdminRentals()">
+          </div>
+          <div class="table-container">
+            <table class="data-table" id="adminRentalTable">
+              <thead>
+                <tr>
+                  <th>Rental ID</th>
+                  <th>Customer</th>
+                  <th>Vehicle</th>
+                  <th>Dates</th>
+                  <th>Cost</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="adminRentalBody">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab: Add Vehicle -->
+        <div class="admin-tab-content" id="adminTabAdd" style="display: none;">
+          <div class="form-container">
+            <div class="glass-card">
+              <h3 style="margin-bottom: var(--space-lg);">➕ Add New Vehicle</h3>
+              <div class="form-group">
+                <label class="form-label" for="newVehicleName">Vehicle Name</label>
+                <input type="text" class="form-input" id="newVehicleName" placeholder="e.g. Toyota Fortuner">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="newVehicleType">Type</label>
+                  <select class="form-select" id="newVehicleType">
+                    <option value="SUV">SUV</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="Hatchback">Hatchback</option>
+                    <option value="Bike">Bike</option>
+                    <option value="Luxury">Luxury</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="newVehicleRate">Rent per Day (₹)</label>
+                  <input type="number" class="form-input" id="newVehicleRate" placeholder="e.g. 2500">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="newVehicleSeats">Seats</label>
+                  <input type="number" class="form-input" id="newVehicleSeats" placeholder="e.g. 5" value="5">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="newVehicleFuel">Fuel Type</label>
+                  <select class="form-select" id="newVehicleFuel">
+                    <option value="Petrol">Petrol</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Electric">Electric</option>
+                    <option value="Hybrid">Hybrid</option>
+                  </select>
+                </div>
+              </div>
+              <button class="btn btn-primary" onclick="addNewVehicle()" style="width: 100%;">
+                ➕ Add Vehicle
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- ═══ RECEIPT MODAL ═══ -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="modal-overlay" id="receiptModal">
+    <div class="modal" style="max-width: 520px;">
+      <div class="modal-header">
+        <h3>🧾 Rental Receipt</h3>
+        <button class="modal-close" onclick="closeReceipt()">✕</button>
+      </div>
+      <div class="receipt-container" id="receiptContent" style="border: none; padding: 0; background: transparent;">
+        <!-- Populated by JS -->
+      </div>
+      <div style="display: flex; gap: var(--space-md); margin-top: var(--space-xl);">
+        <button class="btn btn-primary" onclick="printReceipt()" style="flex: 1;">🖨️ Print Receipt</button>
+        <button class="btn btn-secondary" onclick="closeReceipt()" style="flex: 1;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 <span class="footer-brand">DriveFleet</span> — Online Vehicle Rental System. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
