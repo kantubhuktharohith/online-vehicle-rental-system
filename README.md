@@ -41,7 +41,6 @@ DriveFleet is a static front-end web application for an online vehicle rental sy
 
 ## Notes
 
-- This is a front-end demo and does not include a server-side API.
 
 
 
