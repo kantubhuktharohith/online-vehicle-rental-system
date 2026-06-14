@@ -42,6 +42,6 @@ DriveFleet is a static front-end web application for an online vehicle rental sy
 ## Notes
 
 - This is a front-end demo and does not include a server-side API.
-- Local storage is used for persistence, which means data is isolated to the current browser and device.
+
 
 
