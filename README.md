@@ -38,9 +38,3 @@ DriveFleet is a static front-end web application for an online vehicle rental sy
 - Click the navigation links to move between Home, Vehicles, Rent, Return, and Admin sections.
 - Use the `Rent Now` section to select a vehicle, enter customer details, and confirm rental dates.
 - The app stores bookings in browser local storage, so refreshed visits retain data within the same browser.
-
-## Notes
-
-
-
-
